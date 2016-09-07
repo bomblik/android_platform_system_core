@@ -121,7 +121,8 @@ int local_connect_arbitrary_ports(int console_port, int adb_port)
     }
 #endif
     if (fd < 0) {
-        fd = socket_loopback_client(adb_port, SOCK_STREAM);
+        snprintf(buf, sizeof buf, "%d", adb_port);
+        fd = socket_local_client(buf, ANDROID_SOCKET_NAMESPACE_ABSTRACT, SOCK_STREAM);
     }
 
     if (fd >= 0) {

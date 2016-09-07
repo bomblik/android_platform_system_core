@@ -185,12 +185,12 @@ int _adb_connect(const char *service)
         strcpy(__adb_error, "service name too long");
         return -1;
     }
-    snprintf(tmp, sizeof tmp, "%04x", len);
+    snprintf(tmp, sizeof tmp, "%d", __adb_server_port);
 
     if (__adb_server_name)
         fd = socket_network_client(__adb_server_name, __adb_server_port, SOCK_STREAM);
     else
-        fd = socket_loopback_client(__adb_server_port, SOCK_STREAM);
+        fd = socket_local_client(tmp, ANDROID_SOCKET_NAMESPACE_ABSTRACT, SOCK_STREAM);
 
     if(fd < 0) {
         strcpy(__adb_error, "cannot connect to daemon");
@@ -201,6 +201,7 @@ int _adb_connect(const char *service)
         return -1;
     }
 
+    snprintf(tmp, sizeof tmp, "%04x", len);
     if(writex(fd, tmp, 4) || writex(fd, service, len)) {
         strcpy(__adb_error, "write failure during connection");
         adb_close(fd);

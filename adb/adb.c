@@ -1230,7 +1230,11 @@ int launch_server(int server_port)
  */
 void build_local_name(char* target_str, size_t target_size, int server_port)
 {
-  snprintf(target_str, target_size, "tcp:%d", server_port);
+  if (gListenAll > 0) {
+    snprintf(target_str, target_size, "tcp:%d", server_port);
+  } else {
+    snprintf(target_str, target_size, "local:%d", server_port);
+  }
 }
 
 #if !ADB_HOST
