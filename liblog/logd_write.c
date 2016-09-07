@@ -23,6 +23,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <sys/syscall.h>
 #include <sys/types.h>
 #if (FAKE_LOG_DEVICE == 0)
 #include <sys/socket.h>
@@ -205,7 +206,11 @@ static int __write_to_log_kernel(log_id_t log_id, struct iovec *vec, size_t nr)
     realtime_ts.tv_nsec = ts.tv_nsec;
 
     log_id_buf = log_id;
+#ifdef __BIONIC__
     tid = gettid();
+#else
+    tid = (pid_t) syscall(__NR_gettid);
+#endif
 
     newVec[0].iov_base   = (unsigned char *) &log_id_buf;
     newVec[0].iov_len    = sizeof_log_id_t;
