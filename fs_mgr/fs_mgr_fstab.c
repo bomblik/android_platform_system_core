@@ -17,7 +17,7 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <bsd/string.h>
 #include <sys/mount.h>
 
 #include "fs_mgr_priv.h"

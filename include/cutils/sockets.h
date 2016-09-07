@@ -19,7 +19,7 @@
 
 #include <errno.h>
 #include <stdlib.h>
-#include <string.h>
+#include <bsd/string.h>
 #include <stdbool.h>
 
 #ifdef HAVE_WINSOCK

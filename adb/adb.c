@@ -41,6 +41,7 @@
 #include <sys/prctl.h>
 #include <getopt.h>
 #include <selinux/selinux.h>
+#include <grp.h>
 #else
 #include "usb_vendors.h"
 #endif
