@@ -123,8 +123,8 @@ static __inline__ int  unix_close(int fd)
 {
     return close(fd);
 }
-#undef   close
-#define  close   ____xxx_close
+//#undef   close
+//#define  close   ____xxx_close
 
 static __inline__  int  unix_read(int  fd, void*  buf, size_t  len)
 {
@@ -369,8 +369,8 @@ static __inline__ int  adb_close(int fd)
 {
     return close(fd);
 }
-#undef   close
-#define  close   ____xxx_close
+//#undef   close
+//#define  close   ____xxx_close
 
 
 static __inline__  int  adb_read(int  fd, void*  buf, size_t  len)
@@ -392,8 +392,8 @@ static __inline__ int   adb_lseek(int  fd, int  pos, int  where)
 {
     return lseek(fd, pos, where);
 }
-#undef   lseek
-#define  lseek   ___xxx_lseek
+//#undef   lseek
+//#define  lseek   ___xxx_lseek
 
 static __inline__  int    adb_unlink(const char*  path)
 {

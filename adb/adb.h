@@ -18,7 +18,9 @@
 #define __ADB_H
 
 #include <limits.h>
+#include <sys/types.h>
 
+#include "fdevent.h"
 #include "adb_trace.h"
 #include "transport.h"  /* readx(), writex() */
 

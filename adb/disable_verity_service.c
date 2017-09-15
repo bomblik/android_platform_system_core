@@ -14,25 +14,28 @@
  * limitations under the License.
  */
 
-#include "sysdeps.h"
 
 #define  TRACE_TAG  TRACE_ADB
 #include "adb.h"
+#include "sysdeps.h"
+#include "cutils/properties.h"
+#include "ext4_sb.h"
+#include <fs_mgr.h>
 
 #include <stdio.h>
 #include <stdarg.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <inttypes.h>
+#include <unistd.h>
+#include <errno.h>
+#include <stdbool.h>
 
-#include "cutils/properties.h"
-#include "ext4_sb.h"
-#include <fs_mgr.h>
 
 #define FSTAB_PREFIX "/fstab."
 struct fstab *fstab;
 
-__attribute__((__format__(printf, 2, 3))) __nonnull((2))
+__attribute__((__format__(printf, 2, 3))) __attribute__((nonnull((2))))
 static void write_console(int fd, const char* format, ...)
 {
     char buffer[256];

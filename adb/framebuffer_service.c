@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+#include "fdevent.h"
+#include "adb.h"
+#include "sysdeps.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -22,9 +26,6 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-
-#include "fdevent.h"
-#include "adb.h"
 
 #include <linux/fb.h>
 #include <sys/ioctl.h>
