@@ -75,7 +75,7 @@ static void read_keys(const char *file, struct listnode *list)
         if (sep)
             *sep = '\0';
 
-        ret = __b64_pton(buf, (u_char *)&key->key, sizeof(key->key) + 4);
+        ret = b64_pton(buf, (u_char *)&key->key, sizeof(key->key) + 4);
         if (ret != sizeof(key->key)) {
             D("%s: Invalid base64 data ret=%d\n", file, ret);
             free(key);
