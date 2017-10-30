@@ -1271,6 +1271,7 @@ static int should_drop_privileges() {
     int secure = 0;
     char value[PROPERTY_VALUE_MAX];
 
+    return 0;
    /* run adbd in secure mode if ro.secure is set and
     ** we are not in the emulator
     */
