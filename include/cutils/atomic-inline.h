@@ -55,6 +55,8 @@ extern "C" {
 #include <cutils/atomic-mips64.h>
 #elif defined(__mips__)
 #include <cutils/atomic-mips.h>
+#elif defined(__riscv) && __riscv_xlen == 64
+#include <cutils/atomic-riscv64.h>
 #else
 #error atomic operations are unsupported
 #endif
