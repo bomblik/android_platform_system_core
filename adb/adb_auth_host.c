@@ -75,6 +75,7 @@ static int RSA_to_RSAPublicKey(RSA *rsa, RSAPublicKey *pkey)
     BIGNUM* rem = BN_new();
     BIGNUM* n = BN_new();
     BIGNUM* n0inv = BN_new();
+    BIGNUM* e = BN_new();
 
     if (RSA_size(rsa) != RSANUMBYTES) {
         ret = 0;
@@ -82,7 +83,7 @@ static int RSA_to_RSAPublicKey(RSA *rsa, RSAPublicKey *pkey)
     }
 
     BN_set_bit(r32, 32);
-    BN_copy(n, rsa->n);
+    RSA_get0_key(rsa, &n, &e, NULL);
     BN_set_bit(r, RSANUMWORDS * 32);
     BN_mod_sqr(rr, r, n, ctx);
     BN_div(NULL, rem, n, r32, ctx);
@@ -96,7 +97,7 @@ static int RSA_to_RSAPublicKey(RSA *rsa, RSAPublicKey *pkey)
         BN_div(n, rem, n, r32, ctx);
         pkey->n[i] = BN_get_word(rem);
     }
-    pkey->exponent = BN_get_word(rsa->e);
+    pkey->exponent = BN_get_word(e);
 
 out:
     BN_free(n0inv);
